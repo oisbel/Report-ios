@@ -18,7 +18,7 @@ class ReportTableViewCell: UITableViewCell {
     
     @IBOutlet weak var fechaLabel: UILabel!
     
-    @IBOutlet weak var mensajesLabel: UILabel!
+    @IBOutlet weak var visitasLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

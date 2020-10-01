@@ -98,7 +98,7 @@ extension ReportesViewController: UITableViewDataSource, UITableViewDelegate{
         cell.ayunosLabel.text = "Ayunos: " + String(report.ayunos)
         cell.avivamientosLabel.text = "Avivamientos: " + String(report.avivamientos)
         cell.fechaLabel.text = Months[report.month] ?? "" + "-" + String(report.year)
-        cell.mensajesLabel.text = String(report.mensajes)
+        cell.visitasLabel.text = "Visitas: " + String(report.visitas)
         return cell
     }
     
