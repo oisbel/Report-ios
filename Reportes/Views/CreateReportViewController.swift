@@ -54,8 +54,17 @@ class CreateReportViewController: UIViewController {
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var contentView: UIView!
+    
+    var heightWasChanged: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateReportViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(CreateReportViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         // To hide the indicator at launch
         loadingIndicator.hidesWhenStopped = true
@@ -78,12 +87,27 @@ class CreateReportViewController: UIViewController {
         
         toolBar.setItems([flexibleSpace,doneButton], animated: false)
         
-        avivamientosTextView.inputAccessoryView = toolBar
-        bibliasTextView.inputAccessoryView = toolBar
+        otrosTextView.inputAccessoryView = toolBar
         
         // Quitar teclado cuando de click outside keyboard
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if heightWasChanged{
+            return
+        }
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+           // if keyboard size is not available for some reason, dont do anything
+           return
+        }
+        contentHeight.constant += keyboardSize.height
+        contentView.layoutIfNeeded()
+        heightWasChanged = true
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -130,6 +154,10 @@ class CreateReportViewController: UIViewController {
         reportData.horas_trabajo = Int(trabajoTextField.text ?? "0") ?? 0
         reportData.otros = otrosTextView.text ?? ""
         
+        if !EmptyReport(report: reportData){
+            print("Reporte vacio")
+            return
+        }
         
         self.loadingIndicator.startAnimating()
         
@@ -139,7 +167,7 @@ class CreateReportViewController: UIViewController {
         postNewReportRequest.newReport(reportData, completion: { result in
             switch result{
             case .success(let newReportResponse):
-                print("Se ha creado agregado el reporte satisfactoriamente: \(String(describing: newReportResponse.report))")
+                print("Se ha agregado el reporte satisfactoriamente: \(String(describing: newReportResponse.report))")
                                 
                 DispatchQueue.main.async {
                     self.loadingIndicator.stopAnimating()
@@ -156,6 +184,14 @@ class CreateReportViewController: UIViewController {
                 }
             }
         })
+    }
+    
+    func EmptyReport(report:Report)-> Bool {
+        let total = report.avivamientos + report.biblias + report.ayunos + report.horas_ayunos + report.cultos +
+            report.devocionales + report.enfermos + report.hogares + report.estudios_establecidos + report.estudios_asistidos + report.estudios_realizados +
+            report.mensajeros + report.porciones + report.visitas + report.mensajes + report.sanidades + report.horas_trabajo
+        
+        return total > 0
     }
     
 }

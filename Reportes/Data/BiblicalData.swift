@@ -16,4 +16,5 @@ struct Biblical: Codable {
     var direccion: String
     var email : String?
     var password: String?
+    var id: Int?
 }

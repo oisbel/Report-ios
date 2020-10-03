@@ -59,6 +59,7 @@ class ReportesViewController: UIViewController {
                     DispatchQueue.main.async {
                     self.alertLabel.isHidden = false
                     self.reportsTableView.isHidden = true
+                    self.loadingIndicator.stopAnimating()
                     self.alertLabel.text = "Todavía no ha creado ningún reporte"
                     }
                 }else{
@@ -74,7 +75,8 @@ class ReportesViewController: UIViewController {
                 DispatchQueue.main.async {
                 self.alertLabel.isHidden = false
                 self.reportsTableView.isHidden = true
-                self.alertLabel.text = "No se pudieron recuperar los reportes. Inténtelo denuevo"
+                self.loadingIndicator.stopAnimating()
+                self.alertLabel.text = "No se pudieron recuperar los reportes. Inténtelo de nuevo"
                 }
             }
         })

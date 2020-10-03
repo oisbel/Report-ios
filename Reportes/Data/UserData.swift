@@ -8,6 +8,11 @@
 
 import Foundation
 
+struct EmailPassword: Codable {
+    let email: String
+    let password: String
+}
+
 struct User: Codable, Identifiable {
     let status: String
     let church_id: Int

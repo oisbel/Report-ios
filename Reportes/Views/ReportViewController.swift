@@ -70,6 +70,7 @@ class ReportViewController: UIViewController {
         horas.text = "\(actualReport.horas_trabajo)"
         ayunos.text = "\(actualReport.ayunos)"
         horasAyunos.text = "\(actualReport.horas_ayunos)"
+        devocionales.text = "\(actualReport.devocionales)"
         asistidos.text = "\(actualReport.estudios_asistidos)"
         realizados.text = "\(actualReport.estudios_realizados)"
         mensajeros.text = "\(actualReport.mensajeros)"

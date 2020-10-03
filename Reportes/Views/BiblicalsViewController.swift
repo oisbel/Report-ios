@@ -58,6 +58,7 @@ class BiblicalsViewController: UIViewController {
                     DispatchQueue.main.async {
                     self.alertLabel.isHidden = false
                     self.biblicalsTableView.isHidden = true
+                    self.loadingIndicator.stopAnimating()
                     self.alertLabel.text = "Todavía no ha creado ningún estudio bíblico"
                     }
                 }else{
@@ -73,7 +74,8 @@ class BiblicalsViewController: UIViewController {
                 DispatchQueue.main.async {
                 self.alertLabel.isHidden = false
                 self.biblicalsTableView.isHidden = true
-                self.alertLabel.text = "No se pudieron recuperar los reportes. Inténtelo denuevo"
+                self.loadingIndicator.stopAnimating()
+                self.alertLabel.text = "No se pudieron recuperar los reportes. Inténtelo de nuevo"
                 }
             }
         })
@@ -102,8 +104,61 @@ extension BiblicalsViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let biblical = listBiblicals[indexPath.row]
+    // Para swipe y eliminar
+    //func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //    if editingStyle == .delete{
+    //        listBiblicals.remove(at: indexPath.row)
+    //        biblicalsTableView.deleteRows(at: [indexPath], with: .fade)
+    //    }
+    //}
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Eliminar") { (_, _, completionHandler) in
+            // delete the item here
+            guard let biblicalId = self.listBiblicals[indexPath.row].id else{
+                return
+            }
+            self.DeleteBiblical(biblicalId: biblicalId)
+            self.listBiblicals.remove(at: indexPath.row)
+            self.biblicalsTableView.deleteRows(at: [indexPath], with: .fade)
+            completionHandler(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = .systemRed
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    
+    func DeleteBiblical(biblicalId: Int) {
+        
+        let email = ManageUserData().getUserData(field: UserDefaults.Keys.email)
+        let password = ManageUserData().getUserData(field: UserDefaults.Keys.password)
+        
+        
+        let credencials = EmailPassword(email: email, password: password)
+        
+                
+        self.loadingIndicator.startAnimating()
+        
+        // llamar al post request para agregar el reporte
+        let postDeleteBiblicalRequest = APIDeleteBiblicalRequest(biblicalId: biblicalId)
+        
+        postDeleteBiblicalRequest.deleteBiblical(credencials, completion: { result in
+            switch result{
+            case .success(let deleteBiblicalResponse):
+                print("Se ha eliminado el Estudio Bíblico satisfactoriamente: \(String(describing: deleteBiblicalResponse.biblical))")
+                                
+                DispatchQueue.main.async {
+                    self.loadingIndicator.stopAnimating()
+                }
+            case .failure(let error):
+                print("Ocurrió un error \(error)")
+                
+                DispatchQueue.main.async {
+                    self.loadingIndicator.stopAnimating()
+                }
+            }
+        })
     }
 }
 

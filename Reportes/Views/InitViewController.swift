@@ -70,18 +70,19 @@ class InitViewController: UIViewController {
             print(user.id)
             
             // ir al otro viewcontroler
+            DispatchQueue.main.async {
             let initNameVC = self.storyboard?.instantiateViewController(identifier: "initNameVC") as! InitNameViewController
             initNameVC.modalPresentationStyle = .fullScreen
             initNameVC.userData = user // Pasar estos datos al otro viewcontroler
             initNameVC.password = password
             self.present(initNameVC, animated: true)
-            
+            }
         }
     }
     
     // Aux methods
     
-    let baseUrl = "http://www.sccristo.org"
+    let baseUrl = "https://www.sccristo.org"
     
     // Obterner los da†os desde el servidor
     func getUser(email:String, password:String ,completion: @escaping (User) -> ()) {

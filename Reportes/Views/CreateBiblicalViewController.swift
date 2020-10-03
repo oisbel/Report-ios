@@ -68,7 +68,7 @@ class CreateBiblicalViewController: UIViewController {
         postNewBiblicalRequest.newBiblical(biblicalData, completion: { result in
             switch result{
             case .success(let newBiblicalResponse):
-                print("Se ha creado agregado el reporte satisfactoriamente: \(String(describing: newBiblicalResponse.biblical))")
+                print("Se ha agregado el Estudio Bíblico satisfactoriamente: \(String(describing: newBiblicalResponse.biblical))")
                                 
                 DispatchQueue.main.async {
                     self.loadingIndicator.stopAnimating()

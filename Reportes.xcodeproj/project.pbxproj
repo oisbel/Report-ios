@@ -30,6 +30,7 @@
 		DACE8E3224F4ADD900311B74 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE8E3124F4ADD900311B74 /* LineView.swift */; };
 		DAD0C9732445192A00C500EA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD0C9722445192A00C500EA /* UserData.swift */; };
 		DADA7DB62489AE2C0034BBB6 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADA7DB52489AE2C0034BBB6 /* RoundButton.swift */; };
+		DAE2C44F252814E40025E790 /* DeleteBiblicalRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE2C44E252814E30025E790 /* DeleteBiblicalRequest.swift */; };
 		DAF0AD6D2432F0FE001902E1 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0AD6C2432F0FE001902E1 /* LogInViewController.swift */; };
 		DAF2A3CB243064E000C0908D /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF2A3CA243064E000C0908D /* InitViewController.swift */; };
 		DAFBA00823A147F100ACECF2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBA00723A147F100ACECF2 /* AppDelegate.swift */; };
@@ -66,6 +67,7 @@
 		DACE8E3124F4ADD900311B74 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		DAD0C9722445192A00C500EA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		DADA7DB52489AE2C0034BBB6 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		DAE2C44E252814E30025E790 /* DeleteBiblicalRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteBiblicalRequest.swift; sourceTree = "<group>"; };
 		DAF0AD6C2432F0FE001902E1 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DAF2A3CA243064E000C0908D /* InitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		DAFBA00423A147F000ACECF2 /* Reportes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reportes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +113,7 @@
 				DACB0F4E250E7C1800074BD0 /* GetReportsRequest.swift */,
 				DA36A73B2519AF6600C9ACE9 /* NewBiblicalRequest.swift */,
 				DA1A2D0A251D359D0057F696 /* GetBiblicalsRequest.swift */,
+				DAE2C44E252814E30025E790 /* DeleteBiblicalRequest.swift */,
 			);
 			path = APIRequests;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				DA36A73C2519AF6600C9ACE9 /* NewBiblicalRequest.swift in Sources */,
 				DADA7DB62489AE2C0034BBB6 /* RoundButton.swift in Sources */,
 				DACE8E3224F4ADD900311B74 /* LineView.swift in Sources */,
+				DAE2C44F252814E40025E790 /* DeleteBiblicalRequest.swift in Sources */,
 				DAF2A3CB243064E000C0908D /* InitViewController.swift in Sources */,
 				DAB74E41250D8E9500CCED0D /* ApiUtils.swift in Sources */,
 				DAB287AF2482D5FC000330D6 /* EditUserRequest.swift in Sources */,
